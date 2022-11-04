@@ -31,10 +31,10 @@ public class JobTest {
         assertTrue(testJob3.getPositionType() instanceof PositionType);
 
         assertEquals("Product tester", testJob3.getName());
-        assertEquals("ACME", testJob3.getEmployer().toString());
-        assertEquals("Desert", testJob3.getLocation().toString());
-        assertEquals("Quality control", testJob3.getPositionType().toString());
-        assertEquals("Persistence", testJob3.getCoreCompetency().toString());
+        assertEquals("ACME", testJob3.getEmployer().getValue());
+        assertEquals("Desert", testJob3.getLocation().getValue());
+        assertEquals("Quality control", testJob3.getPositionType().getValue());
+        assertEquals("Persistence", testJob3.getCoreCompetency().getValue());
 
     }
 
@@ -50,10 +50,9 @@ public class JobTest {
     public void testToStringStartsAndEndsWithNewLine() {
         Job testJob6 = new Job("Front end developer", new Employer("Google"), new Location("San Francisco"), new PositionType("Java development"), new CoreCompetency("Organization"));
         String testString = testJob6.toString();
-        String expectedString = "\n";
 
-        assertEquals(expectedString, testString.substring(0,1));
-        assertEquals(expectedString, testString.substring(testString.length() - 1,testString.length()));
+        assertEquals('\n', testString.charAt(0));
+        assertEquals('\n', testString.charAt(testString.length() - 1));
     }
 
     @Test
@@ -68,9 +67,11 @@ public class JobTest {
 
     @Test
     public void testToStringHandlesEmptyField() {
-        Job testJob8 = new Job("Dog parent", new Employer(), new Location("Work from home"), new PositionType("Pet care"), new CoreCompetency("Big heart"));
+        Job testJob8 = new Job("Dog parent", new Employer(""), new Location("Work from home"), new PositionType("Pet care"), new CoreCompetency("Big heart"));
         String testString3 = testJob8.toString();
-        String expectedString2 = "\n" + "ID: 1" + "\n" + "Name: Dog parent" + "\n" + "Employer: Data not available" + "\n" + "Location: Work from home"  + "\n" + "Position Type: Pet care" + "\n" + "Core Competency: Big heart" + "\n";
+        String expectedString3 = "\n" + "ID: 1" + "\n" + "Name: Dog parent" + "\n" + "Employer: Data not available" + "\n" + "Location: Work from home"  + "\n" + "Position Type: Pet care" + "\n" + "Core Competency: Big heart" + "\n";
+
+        assertEquals(expectedString3, testString3);
 
     }
 
